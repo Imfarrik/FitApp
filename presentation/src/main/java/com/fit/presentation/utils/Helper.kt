@@ -7,6 +7,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import kotlinx.serialization.Serializable
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -19,14 +20,10 @@ internal fun Long?.checkForNull(): String {
     return this?.toString() ?: ""
 }
 
-fun NavGraphBuilder.animatedComposableSlideHorizontal(
-    route: String,
-    arguments: List<NamedNavArgument> = emptyList(),
-    content: @Composable (NavBackStackEntry) -> Unit
+inline fun <reified T : Any> NavGraphBuilder.animatedComposableSlideHorizontal(
+    crossinline content: @Composable (NavBackStackEntry) -> Unit
 ) {
-    composable(
-        route = route,
-        arguments = arguments,
+    composable<T>(
         enterTransition = {
             slideInHorizontally(initialOffsetX = { 500 })
         },
@@ -38,8 +35,8 @@ fun NavGraphBuilder.animatedComposableSlideHorizontal(
         },
         popExitTransition = {
             fadeOut()
-        })
-    {
+        }
+    ) {
         content(it)
     }
 }

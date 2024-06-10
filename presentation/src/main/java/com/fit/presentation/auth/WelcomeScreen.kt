@@ -13,8 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.fit.presentation.baseviews.BaseContainerWithImage
 import com.fit.presentation.baseviews.BaseMainButton
+import com.fit.presentation.baseviews.Logotype
 import com.fit.presentation.splash.ImageWithCaptionItem
-import com.fit.presentation.splash.Logotype
 import com.fit.resources.theme.CreateAccountButtonCaption
 import com.fit.resources.theme.LaterButtonCaption
 import com.fit.resources.theme.TextButtonColor

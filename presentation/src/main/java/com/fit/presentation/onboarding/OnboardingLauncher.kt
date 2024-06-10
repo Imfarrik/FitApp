@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.fit.presentation.onboarding.navigation.SplashScreen
 import com.fit.resources.theme.FitnesAppTheme
 
 @Composable

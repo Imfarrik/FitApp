@@ -17,7 +17,7 @@ import com.fit.presentation.auth.StateHandler
 import com.fit.presentation.auth.VerifyScreen
 import com.fit.presentation.auth.WelcomeScreen
 import com.fit.presentation.baseviews.StubScreen
-import com.fit.presentation.splash.SplashScreenLogic
+import com.fit.presentation.onboarding.navigation.OnboardingNavHost
 
 fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
             navigation(
@@ -25,13 +25,7 @@ fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
                 startDestination = AuthScreen.Splash.route
             ) {
                 composable(route = AuthScreen.Splash.route) {
-                    SplashScreenLogic(
-                        navigateToAuthScreen = {
-                            rootNavController.navigate(route = AuthScreen.WELCOME_SCREEN) {
-                                popUpTo(rootNavController.graph.id) { inclusive = true }
-                            }
-                        }
-                    )
+                    OnboardingNavHost()
                 }
                 composable(route = AuthScreen.Welcome.route) {
                     CrutchingAdapt {

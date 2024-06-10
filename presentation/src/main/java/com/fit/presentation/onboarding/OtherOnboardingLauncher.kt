@@ -1,8 +1,7 @@
-package com.fit.presentation.splash
+package com.fit.presentation.onboarding
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,57 +17,67 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fit.presentation.baseviews.BaseContainerWithImage
 import com.fit.presentation.baseviews.BaseMainButton
-import com.fit.resources.theme.FirstOnboardingImage
+import com.fit.presentation.navigation.CrutchingAdapt
+import com.fit.presentation.splash.ImageWithCaptionItem
+import com.fit.presentation.splash.SliderWithIndicator
 import com.fit.resources.theme.NextButtonCaption
-import com.fit.resources.R
 
 @Preview
 @Composable
-fun FirstOnboardingScreenPreview() {
-    FirstOnboardingScreen()
-}
-
-@Preview
-@Composable
-fun OtherOnboardingItemPreview() {
+private fun OtherOnboardingItemPreview() {
     BaseContainerWithImage(
         item =
-            ImageWithCaptionItem.onboardingItems()[0]
+        ImageWithCaptionItem.onboardingItems()[0]
     )
 }
 
 @Preview
 @Composable
-fun OtherOnboardingScreenPreview() {
+private fun OtherOnboardingScreenPreview() {
     OtherOnboardingScreen(
         onboardingItems =
-            ImageWithCaptionItem.onboardingItems()
+        ImageWithCaptionItem.onboardingItems()
     )
 }
 
 @Composable
-fun FirstOnboardingScreen() {
-    Image(
-        painter = painterResource(id = R.drawable.onboarding_welcome_screen_img),
-        contentDescription = FirstOnboardingImage,
+internal fun OtherOnboardingLauncherRoute(
+    onBack: () -> Unit,
+    navigateToWelcome: () -> Unit
+) {
+    OtherOnboardingLauncherScreen {
+        navigateToWelcome()
+    }
+}
+
+@Composable
+private fun OtherOnboardingLauncherScreen(
+    navigateToWelcome: () -> Unit
+) {
+    Box(
         modifier = Modifier.fillMaxSize(),
-        contentScale = ContentScale.Crop
-    )
+        contentAlignment = Alignment.Center
+    ) {
+        CrutchingAdapt {
+            OtherOnboardingScreen(
+                onboardingItems = ImageWithCaptionItem.onboardingItems(),
+                navigateToWelcome = navigateToWelcome
+            )
+        }
+    }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OtherOnboardingScreen(
+private fun OtherOnboardingScreen(
     onboardingItems: List<ImageWithCaptionItem>,
-    onNextButtonLastClick: () -> Unit = {}
+    navigateToWelcome: () -> Unit = {}
 ) {
     val pagerState = rememberPagerState(
         pageCount = { onboardingItems.size }
@@ -121,11 +130,11 @@ fun OtherOnboardingScreen(
         BaseMainButton(
             onClick =
             if (currentPageIndex == onboardingItems.lastIndex)
-                onNextButtonLastClick
+                navigateToWelcome
             else
                 setShouldScrollPagerTrue,
             caption = NextButtonCaption,
             modifier = Modifier.padding(all = 12.dp),
-            )
+        )
     }
 }
