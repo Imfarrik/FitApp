@@ -17,20 +17,43 @@ android {
     }
 
     buildTypes {
+
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            buildConfigField(
+                "String",
+                "API_BASE_URL",
+                "\"UNKNOWN\""
+            )
+        }
+
+        debug {
+
+            buildConfigField(
+                "String",
+                "API_BASE_URL",
+                "\"http://127.0.0.0:8000\""
+            )
+
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 }
 
@@ -43,4 +66,12 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
     implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.retrofit)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.androidx.annotation)
+    implementation(libs.retrofit.serialization.converter)
+    implementation(libs.retrofit.adapters.result)
+
+    debugImplementation(libs.retrofit.logger)
 }
