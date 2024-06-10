@@ -121,6 +121,7 @@ fun PollScreenThird(
             }
         }
     }
+
 }
 
 @Composable
