@@ -120,7 +120,6 @@ fun PollScreenThird(
                 Spacer(modifier = Modifier.height(20.dp)) // Отступ в 20dp под кнопкой
             }
         }
-
     }
 }
 
