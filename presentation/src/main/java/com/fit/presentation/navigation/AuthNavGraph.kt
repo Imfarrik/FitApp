@@ -11,6 +11,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import androidx.navigation.serialization.generateRouteWithArgs
 import com.fit.presentation.auth.AuthViewModel
 import com.fit.presentation.auth.LoginScreen
 import com.fit.presentation.auth.StateHandler
@@ -21,11 +22,11 @@ import com.fit.presentation.onboarding.navigation.OnboardingNavHost
 
 fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
             navigation(
-                route = Graph.AUTH,
+                route = AuthScreen.SPLASH_SCREEN,
                 startDestination = AuthScreen.Splash.route
             ) {
                 composable(route = AuthScreen.Splash.route) {
-                    OnboardingNavHost()
+                    OnboardingNavHost {}
                 }
                 composable(route = AuthScreen.Welcome.route) {
                     CrutchingAdapt {

@@ -44,13 +44,11 @@ private fun FirstOnboardingLauncherScreen(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        CrutchingAdapt {
             Image(
                 painter = painterResource(id = R.drawable.onboarding_welcome_screen_img),
                 contentDescription = FirstOnboardingImage,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
-        }
     }
 }

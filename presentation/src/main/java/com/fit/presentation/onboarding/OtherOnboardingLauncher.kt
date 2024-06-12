@@ -65,12 +65,10 @@ private fun OtherOnboardingLauncherScreen(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        CrutchingAdapt {
             OtherOnboardingScreen(
                 onboardingItems = ImageWithCaptionItem.onboardingItems(),
                 navigateToWelcome = navigateToWelcome
             )
-        }
     }
 }
 
