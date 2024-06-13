@@ -1,8 +1,6 @@
 package com.fit.presentation.poll
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,21 +23,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.fit.presentation.baseviews.BasePollContainer
-import com.fit.resources.R
 import com.fit.resources.theme.AbsAndBac
-import com.fit.resources.theme.BackgroundPollScreen
 import com.fit.resources.theme.Buttocks
+import com.fit.resources.theme.ButtonColor
 import com.fit.resources.theme.Cardio
 import com.fit.resources.theme.Chest
+import com.fit.resources.theme.DisabledButtonColor
 import com.fit.resources.theme.Legs
 import com.fit.resources.theme.Next
 import com.fit.resources.theme.SelectTheAreasYouWantToWorkOn
@@ -58,7 +54,7 @@ fun PollScreenFourth(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundPollScreen) // Замените Color.White на нужный цвет
+            .background(Color.White) // Замените Color.White на нужный цвет
     ) {
         BasePollContainer(
             currentProgress = currentProgress,
@@ -85,18 +81,6 @@ fun PollScreenFourth(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxHeight(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.temporarily),
-                                contentDescription = "Description of the image"
-                            )
-                        }
 
                         Column(
                             modifier = Modifier
@@ -108,7 +92,8 @@ fun PollScreenFourth(
                                 modifier = Modifier
                                     .size(width = 100.dp, 50.dp)
                                     .clip(shape = RoundedCornerShape(size = 3.dp))
-                                    .background(Color.White)
+                                    .background(DisabledButtonColor),
+                                contentAlignment = Alignment.Center
                             ) {
                                 Text(
                                     text = Chest,
@@ -117,12 +102,12 @@ fun PollScreenFourth(
                                     modifier = Modifier.align(Alignment.Center)
                                 )
                             }
-                            Spacer(modifier = Modifier.height(20.dp))
+                            Spacer(modifier = Modifier.height(50.dp))
                             Box(
                                 modifier = Modifier
                                     .size(width = 100.dp, 50.dp)
                                     .clip(shape = RoundedCornerShape(size = 3.dp))
-                                    .background(Color.White)
+                                    .background(DisabledButtonColor)
                             ) {
                                 Text(
                                     text = Cardio,
@@ -131,12 +116,12 @@ fun PollScreenFourth(
                                     modifier = Modifier.align(Alignment.Center)
                                 )
                             }
-                            Spacer(modifier = Modifier.height(20.dp))
+                            Spacer(modifier = Modifier.height(50.dp))
                             Box(
                                 modifier = Modifier
                                     .size(width = 100.dp, 50.dp)
                                     .clip(shape = RoundedCornerShape(size = 3.dp))
-                                    .background(Color.White)
+                                    .background(DisabledButtonColor)
                             ) {
                                 Text(
                                     text = AbsAndBac,
@@ -145,12 +130,12 @@ fun PollScreenFourth(
                                     modifier = Modifier.align(Alignment.Center)
                                 )
                             }
-                            Spacer(modifier = Modifier.height(20.dp))
+                            Spacer(modifier = Modifier.height(50.dp))
                             Box(
                                 modifier = Modifier
                                     .size(width = 100.dp, 50.dp)
                                     .clip(shape = RoundedCornerShape(size = 3.dp))
-                                    .background(Color.White)
+                                    .background(DisabledButtonColor)
                             ) {
                                 Text(
                                     text = Buttocks,
@@ -159,12 +144,12 @@ fun PollScreenFourth(
                                     modifier = Modifier.align(Alignment.Center)
                                 )
                             }
-                            Spacer(modifier = Modifier.height(20.dp))
+                            Spacer(modifier = Modifier.height(50.dp))
                             Box(
                                 modifier = Modifier
                                     .size(width = 100.dp, 50.dp)
                                     .clip(shape = RoundedCornerShape(size = 3.dp))
-                                    .background(Color.White)
+                                    .background(DisabledButtonColor)
                             ) {
                                 Text(
                                     text = Legs,
@@ -188,9 +173,9 @@ fun PollScreenFourth(
                     ) {
                         Button(
                             onClick = { /* Действие при нажатии на кнопку */ },
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(0.dp),
-                            colors = ButtonDefaults.buttonColors(Color.Blue)
+                            modifier = Modifier.height(55.dp).weight(1f),
+                            shape = RoundedCornerShape(5.dp),
+                            colors = ButtonDefaults.buttonColors(ButtonColor)
                         ) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically

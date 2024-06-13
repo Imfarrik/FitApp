@@ -38,9 +38,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.fit.presentation.baseviews.BasePollContainer
-import com.fit.resources.theme.BackgroundPollScreen
+import com.fit.resources.theme.ButtonColor
 import com.fit.resources.theme.DesiredWeight
+import com.fit.resources.theme.DisabledButtonColor
 import com.fit.resources.theme.Next
+import com.fit.resources.theme.SelectTheZones
 import com.fit.resources.theme.YourHeight
 import com.fit.resources.theme.YourWeight
 
@@ -60,13 +62,25 @@ fun PollScreenThird(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundPollScreen)
+            .background(Color.White)
     ) {
         BasePollContainer(
             currentProgress = currentProgress,
             onBackButtonClick = onBackButtonClick,
         ) {
-            Column(modifier = Modifier.padding(top = 24.dp)) {
+            Column(
+                modifier = Modifier
+                    .padding(top = 24.dp)
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = SelectTheZones,
+                    textAlign = TextAlign.Center,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                )
                 Spacer(modifier = Modifier.weight(1f))
 
                 Box(
@@ -99,9 +113,11 @@ fun PollScreenThird(
                 ) {
                     Button(
                         onClick = { /* Действие при нажатии на кнопку */ },
-                        modifier = Modifier.weight(1f) .height(60.dp),
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(55.dp),
                         shape = RoundedCornerShape(4.dp),
-                        colors = ButtonDefaults.buttonColors(Color.Blue)
+                        colors = ButtonDefaults.buttonColors(ButtonColor)
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically
@@ -143,7 +159,7 @@ fun CustomBoxWithText(text: String, unit: String) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)
-                .background(Color.Gray, RoundedCornerShape(8.dp))
+                .background(DisabledButtonColor, RoundedCornerShape(8.dp))
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .horizontalScroll(rememberScrollState()),
             contentAlignment = Alignment.Center
