@@ -1,5 +1,6 @@
 package com.fit.presentation.auth
 
+import android.util.Log
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -39,6 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.fit.data.model.VerifyRequest
 import com.fit.presentation.baseviews.BaseMainButton
 import com.fit.resources.theme.ConfirmTheEmailAddress
 import com.fit.resources.theme.CreateAccountButtonCaption
@@ -54,19 +56,29 @@ import kotlin.concurrent.fixedRateTimer
 @Preview(showBackground = true)
 @Composable
 private fun VerifyScreenPreview() {
-
-    VerifyScreen()
-
+    VerifyLauncherScreen()
 }
 
 @Composable
-fun VerifyScreen(
-    navigateToPoll: () -> Unit = {}
+internal fun VerifyLauncherRoute(
+    onBack: () -> Unit,
+    navigateToPoll: () -> Unit,
+    verify: (VerifyRequest) -> Unit = { VerifyRequest() }
+) {
+    VerifyLauncherScreen(
+        navigateToPoll = navigateToPoll,
+        verify = verify
+    )
+}
+
+@Composable
+private fun VerifyLauncherScreen(
+    navigateToPoll: () -> Unit = {},
+    verify: (VerifyRequest) -> Unit = { VerifyRequest() }
 ) {
     val textStates = remember { List(5) { mutableStateOf(TextFieldValue()) } }
     Column(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .fillMaxSize()
     ) {
         Box(
@@ -106,11 +118,7 @@ fun VerifyScreen(
                     }
                 }
 
-
-
                 Spacer(modifier = Modifier.height(15.dp))
-
-
 
                 Spacer(modifier = Modifier.width(15.dp))
 
@@ -126,8 +134,6 @@ fun VerifyScreen(
                     ) {
                         CounterText()
                     }
-
-
 
                     Row(
                         modifier = Modifier,
@@ -148,7 +154,6 @@ fun VerifyScreen(
             }
         }
 
-
         Spacer(modifier = Modifier.height(450.dp))
         Box(
             modifier = Modifier
@@ -163,7 +168,19 @@ fun VerifyScreen(
                 BaseMainButton(
                     modifier = Modifier.padding(horizontal = 15.dp),
                     caption = CreateAccountButtonCaption,
-                ) { navigateToPoll() }
+                ) {
+                    verify(
+                        VerifyRequest(
+                            code =
+                            buildString {
+                                textStates.map {
+                                    append(it.value.text)
+                                }
+                            }
+                        )
+                    )
+                    navigateToPoll()
+                }
             }
         }
     }

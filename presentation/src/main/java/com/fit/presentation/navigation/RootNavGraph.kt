@@ -1,6 +1,7 @@
 package com.fit.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
@@ -19,6 +20,10 @@ object Onboarding
 object Auth
 @Serializable
 object Poll
+@Serializable
+object Coach
+@Serializable
+object Main
 
 internal fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
     this.navigate(route = Auth, navOptions = navOptions)
@@ -26,6 +31,14 @@ internal fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
 
 internal fun NavController.navigateToPoll(navOptions: NavOptions? = null) {
     this.navigate(route = Poll, navOptions = navOptions)
+}
+
+internal fun NavController.navigateToCoach(navOptions: NavOptions? = null) {
+    this.navigate(route = Coach, navOptions = navOptions)
+}
+
+internal fun NavController.navigateToMain(navOptions: NavOptions? = null) {
+    this.navigate(route = Main, navOptions = navOptions)
 }
 
 @Composable
@@ -38,9 +51,15 @@ fun RootNavGraph(navController: NavHostController) {
             OnboardingNavHost { navController.navigateToAuth() }
         }
         composable<Auth> {
-            AuthNavHost { navController.navigateToPoll() }
+            AuthNavHost(rootNavHostController = navController)
         }
         composable<Poll> {
+            PollNavHost()
+        }
+        composable<Coach> {
+
+        }
+        composable<Main> {
 
         }
     }

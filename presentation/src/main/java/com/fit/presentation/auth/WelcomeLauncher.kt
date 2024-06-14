@@ -11,24 +11,37 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.fit.presentation.baseviews.BaseContainerWithImage
 import com.fit.presentation.baseviews.BaseMainButton
 import com.fit.presentation.baseviews.Logotype
 import com.fit.presentation.splash.ImageWithCaptionItem
 import com.fit.resources.theme.CreateAccountButtonCaption
-import com.fit.resources.theme.LaterButtonCaption
+import com.fit.resources.theme.ImCoachButtonCaption
 import com.fit.resources.theme.TextButtonColor
 
 @Preview(showBackground = true)
 @Composable
-fun WelcomeScreenPreview() {
-    WelcomeScreen()
+private fun WelcomeScreenPreview() {
+    WelcomeLauncherScreen()
 }
 
 @Composable
-fun WelcomeScreen(
-    navigateToCreate: () -> Unit = {},
-    navigateToMain: () -> Unit = {}
+internal fun WelcomeLauncherRoute(
+    onBack: () -> Unit,
+    navigateToLogin: () -> Unit,
+    navigateToCoach: () -> Unit
+) {
+    WelcomeLauncherScreen(
+        navigateToLogin = navigateToLogin,
+        navigateToCoach = navigateToCoach
+    )
+}
+
+@Composable
+private fun WelcomeLauncherScreen(
+    navigateToLogin: () -> Unit = {},
+    navigateToCoach: () -> Unit = {}
 ) {
     ConstraintLayout {
         val (imgWithTxt, logo, crtBtn, ltrBtn) = createRefs()
@@ -63,11 +76,11 @@ fun WelcomeScreen(
                 .padding(horizontal = 12.dp)
                 .padding(top = 48.dp),
             caption = CreateAccountButtonCaption,
-            onClick = navigateToCreate
+            onClick = navigateToLogin
         )
 
         Text(
-            text = LaterButtonCaption,
+            text = ImCoachButtonCaption,
             modifier = Modifier
                 .constrainAs(ltrBtn) {
                     top.linkTo(crtBtn.bottom)
@@ -75,7 +88,7 @@ fun WelcomeScreen(
                     end.linkTo(parent.end)
                 }
                 .padding(vertical = 12.dp)
-                .clickable { navigateToMain() },
+                .clickable { navigateToCoach() },
             color = TextButtonColor,
             textDecoration = TextDecoration.Underline
         )

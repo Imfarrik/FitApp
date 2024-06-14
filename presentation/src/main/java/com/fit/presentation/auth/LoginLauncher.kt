@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,12 +20,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.TextFieldDecorator
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -44,6 +47,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.fit.data.model.LoginRequest
 import com.fit.presentation.baseviews.BaseMainButton
 import com.fit.resources.R
@@ -62,16 +66,48 @@ import com.fit.resources.theme.TextPrivacyPolicy
 @Preview(showBackground = true)
 @Composable
 private fun LoginScreenPreview() {
-
-    LoginScreen(login = {})
-
+    LoginLauncherScreen()
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(
+internal fun LoginLauncherRoute(
+    onBack: () -> Unit,
+    rememberViewModel: (AuthLauncherVM) -> Unit,
+    navigateToVerify: () -> Unit,
+    navigateToMain: () -> Unit
+) {
+    val authViewModel: AuthLauncherVM =
+        hiltViewModel<AuthLauncherVM>().also{
+            rememberViewModel(it)
+        }
+
+    LoginLauncher(
+        viewModel = authViewModel,
+        onBack = onBack,
+        navigateToVerify = navigateToVerify
+    ) { navigateToMain() }
+}
+
+@Composable
+internal fun LoginLauncher(
+    viewModel: AuthLauncherVM,
+    onBack: () -> Unit,
+    navigateToVerify: () -> Unit,
+    navigateToMain: () -> Unit
+) {
+    LoginLauncherScreen(
+        navigateToVerify = navigateToVerify,
+        navigateToMain = navigateToMain
+    ) {
+        viewModel.login(it)
+    }
+}
+
+@Composable
+private fun LoginLauncherScreen(
+    navigateToVerify: () -> Unit = {},
+    navigateToMain: () -> Unit = {},
     login: (LoginRequest) -> Unit = { LoginRequest() },
-    navigateToVerify: () -> Unit = {}
 ) {
     var emailText by remember { mutableStateOf(TextFieldValue()) }
     var isAgreeWithPolicy by remember {
@@ -80,7 +116,6 @@ fun LoginScreen(
 
     Column(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .fillMaxSize()
     ) {
         Box(
@@ -246,11 +281,20 @@ fun LoginScreen(
                     modifier = Modifier.padding(horizontal = 15.dp),
                     caption = NextButtonCaption,
                     enabled = isAgreeWithPolicy
-                ) { navigateToVerify() }
+                ) {
+                    login(
+                        LoginRequest(
+                            email = emailText.text
+                        )
+                    )
+                    navigateToVerify()
+                }
 
                 Text(
-                    text = LogInAnonymously, style = TextStyle(fontSize = 16.sp),
+                    text = LogInAnonymously,
+                    style = TextStyle(fontSize = 16.sp),
                     color = TextColorGray,
+                    modifier = Modifier.clickable { navigateToMain() }
                 )
             }
         }

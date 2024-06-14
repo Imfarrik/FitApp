@@ -1,6 +1,10 @@
 package com.fit.presentation.navigation
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -11,12 +15,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import androidx.navigation.serialization.generateRouteWithArgs
-import com.fit.presentation.auth.AuthViewModel
-import com.fit.presentation.auth.LoginScreen
+import com.fit.presentation.auth.AuthLauncherVM
 import com.fit.presentation.auth.StateHandler
-import com.fit.presentation.auth.VerifyScreen
-import com.fit.presentation.auth.WelcomeScreen
 import com.fit.presentation.baseviews.StubScreen
 import com.fit.presentation.onboarding.navigation.OnboardingNavHost
 
@@ -30,25 +30,25 @@ fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
                 }
                 composable(route = AuthScreen.Welcome.route) {
                     CrutchingAdapt {
-                        WelcomeScreen(
-                            navigateToCreate = {
-                                rootNavController.navigate(AuthScreen.Login.route)
-                            },
-                            navigateToMain = {
-                                rootNavController.navigate(AuthScreen.Main.route)
-                            }
-                        )
+//                        WelcomeLauncherScreen(
+//                            navigateToCreate = {
+//                                rootNavController.navigate(AuthScreen.Login.route)
+//                            },
+//                            navigateToMain = {
+//                                rootNavController.navigate(AuthScreen.Main.route)
+//                            }
+//                        )
                     }
                 }
                 composable(route = AuthScreen.Login.route) {
-                    LoginScreen {
-                        rootNavController.navigate(AuthScreen.Verify.route)
-                    }
+//                    LoginLauncherScreen {
+//                        rootNavController.navigate(AuthScreen.Verify.route)
+//                    }
                 }
                 composable(route = AuthScreen.Verify.route) {
-                    VerifyScreen {
-                        rootNavController.navigate(AuthScreen.Poll.route)
-                    }
+//                    VerifyLauncherScreen {
+//                        rootNavController.navigate(AuthScreen.Poll.route)
+//                    }
                 }
                 composable(route = AuthScreen.Poll.route) {
                     CrutchingAdapt { PollNavHost() }
@@ -79,8 +79,8 @@ sealed class AuthScreen(val route: String) {
 
 @Composable
 fun NavHostController.WithAuthViewModel(
-    authViewModel: AuthViewModel = viewModel<AuthViewModel>(),
-    composable: @Composable (AuthViewModel) -> Unit
+    authViewModel: AuthLauncherVM = viewModel<AuthLauncherVM>(),
+    composable: @Composable (AuthLauncherVM) -> Unit
 ) {
     authViewModel.authState
         .collectAsState()
@@ -97,6 +97,11 @@ fun CrutchingAdapt(composable: @Composable () -> Unit) {
          * TODO: When UI adaptation would be resolved
          * TODO: then should kill this CRUTCH
          */
-        modifier = Modifier.verticalScroll(rememberScrollState())
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.navigationBars)
+            .verticalScroll(rememberScrollState())
+        ,
+//        verticalArrangement = Arrangement.Center
     ) { composable() }
 }

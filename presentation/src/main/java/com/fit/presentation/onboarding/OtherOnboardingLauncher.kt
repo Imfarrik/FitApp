@@ -24,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fit.presentation.baseviews.BaseContainerWithImage
 import com.fit.presentation.baseviews.BaseMainButton
-import com.fit.presentation.navigation.CrutchingAdapt
 import com.fit.presentation.splash.ImageWithCaptionItem
 import com.fit.presentation.splash.SliderWithIndicator
 import com.fit.resources.theme.NextButtonCaption
