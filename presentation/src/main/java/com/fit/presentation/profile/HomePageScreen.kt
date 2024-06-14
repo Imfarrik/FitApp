@@ -63,6 +63,7 @@ fun HomePageScreen(
             .fillMaxSize()
             .padding(horizontal = 16.dp)
     ) {
+        Spacer(modifier = Modifier.height(20.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -79,14 +80,14 @@ fun HomePageScreen(
 
             Box(
                 modifier = Modifier
-                    .size(24.dp)
+                    .size(45.dp)
                     .background(DisabledButtonColor),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.img_home_page),
                     contentDescription = null,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier.size(24.dp)
                 )
             }
         }
@@ -202,8 +203,8 @@ fun HomePageScreen(
         ) {
             Box(
                 modifier = Modifier
-                    .width(309.dp)
-                    .height(206.dp) // Увеличил высоту для примера
+                    .fillMaxWidth() // Растягиваем Box на максимально доступную ширину
+                    .height(250.dp) // Увеличил высоту для примера
                     .clip(shape = RoundedCornerShape(size = 8.dp))
                     .background(DisabledButtonColor)
                     .padding(10.dp),
@@ -223,43 +224,46 @@ fun HomePageScreen(
                     Spacer(modifier = Modifier.weight(1f))
                     ImageTextImageBlock(R.drawable.img_support_service, SupportServic, R.drawable.img_right)
                 }
-
             }
         }
-        Spacer(modifier = Modifier.height(250.dp))
+
+        Spacer(modifier = Modifier.height(200.dp))
         Row(
             modifier = Modifier.fillMaxWidth(), // Растягиваем Row на всю ширину
             horizontalArrangement = Arrangement.SpaceEvenly, // Устанавливаем равное расстояние между элементами
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.drawable.img_additionally),
+                painter = painterResource(id = R.drawable.img_home_home),
                 contentDescription = "Image 1",
                 modifier = Modifier.size(30.dp) // Устанавливаем размер изображения
             )
             Image(
-                painter = painterResource(id = R.drawable.img_additionally),
+                painter = painterResource(id = R.drawable.img_home_calendar),
                 contentDescription = "Image 2",
                 modifier = Modifier.size(30.dp) // Устанавливаем размер изображения
             )
             Image(
-                painter = painterResource(id = R.drawable.img_additionally),
+                painter = painterResource(id = R.drawable.img_home_sport),
                 contentDescription = "Image 1",
                 modifier = Modifier.size(30.dp) // Устанавливаем размер изображения
             )
             Image(
-                painter = painterResource(id = R.drawable.img_additionally),
+                painter = painterResource(id = R.drawable.img_home_sms),
                 contentDescription = "Image 2",
                 modifier = Modifier.size(30.dp) // Устанавливаем размер изображения
             )
-            Button(onClick = { /* Действие при нажатии на кнопку */ }) {
-                Text("Кнопка")
-            }
+            Image(
+                painter = painterResource(id = R.drawable.img),
+                contentDescription = "Image 2",
+                modifier = Modifier.size(100.dp) // Устанавливаем размер изображения
+            )
+
         }
 
 
 
-        Spacer(modifier = Modifier.height(25.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
     }
 }
@@ -293,7 +297,9 @@ fun ImageTextImageBlock(leftImageResId: Int, text: String, rightImageResId: Int)
             painter = painterResource(id = rightImageResId),
             contentDescription = "Right Image"
         )
+        Spacer(modifier = Modifier.height(20.dp))
     }
+
 }
 
 
