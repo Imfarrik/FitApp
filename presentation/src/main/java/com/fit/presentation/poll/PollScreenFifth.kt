@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.fit.presentation.baseviews.BasePollContainer
 import com.fit.resources.theme.ButtonColor
 import com.fit.resources.theme.ChooseTheTrainingFrequency
@@ -42,24 +44,20 @@ import com.fit.resources.theme.trainingText3
 @Preview(showBackground = true)
 @Composable
 fun FifthPollPreview() {
-    PollScreenFifth(5) {}
+    PollScreenFifth(hiltViewModel())
 }
 
 @Composable
 fun PollScreenFifth(
-    currentProgress: Int = 0,
-    onBackButtonClick: () -> Unit,
+    pollViewModel: PollLauncherVM,
+    navigateToNextScreen: () -> Unit = {}
 ) {
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
-        contentAlignment = Alignment.Center
+            .background(Color.White)
+            .padding(horizontal = 20.dp)
     ) {
-        BasePollContainer(
-            currentProgress = currentProgress,
-            onBackButtonClick = onBackButtonClick,
-        ) {
             Text(
                 text = ChooseTheTrainingFrequency,
                 fontSize = 25.sp,
@@ -95,7 +93,10 @@ fun PollScreenFifth(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Button(
-                    onClick = { /* Действие при нажатии на кнопку */ },
+                    onClick = {
+                        pollViewModel.toNextPollScreen()
+                        navigateToNextScreen()
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .height(55.dp),
@@ -109,14 +110,13 @@ fun PollScreenFifth(
                         Text(text = Next)
                         Spacer(modifier = Modifier.weight(1f))
                         Icon(
-                            imageVector = Icons.Default.ArrowForward,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                             contentDescription = null,
                             tint = Color.White
                         )
                     }
                 }
             }
-        }
     }
 
 }
@@ -128,7 +128,7 @@ fun CustomTextBlock(
     height: Dp,
     minTextHeight: Dp,
     maxTextHeight: Dp,
-    padding: Modifier
+    modifier: Modifier
 ) {
     Box(
         modifier = Modifier
@@ -142,7 +142,6 @@ fun CustomTextBlock(
         )
     }
 }
-
 
 @Composable
 fun TextBlockWithCustomTexts(
@@ -190,7 +189,5 @@ fun TextBlockWithCustomTexts(
                 Modifier.padding(end = 15.dp)
             ) // Добавлен отступ справа 15dp
         }
-
     }
 }
-

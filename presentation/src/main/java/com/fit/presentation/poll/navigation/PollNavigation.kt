@@ -1,6 +1,9 @@
 package com.fit.presentation.poll.navigation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -12,6 +15,9 @@ import com.fit.presentation.poll.PollScreenFirst
 import com.fit.presentation.poll.PollScreenSecond
 import com.fit.presentation.poll.PollScreenThird
 import com.fit.presentation.poll.PollLauncherVM
+import com.fit.presentation.poll.PollScreenFifth
+import com.fit.presentation.poll.PollScreenFourth
+import com.fit.presentation.poll.PollScreenSixth
 import com.fit.presentation.utils.navigatingToScreen
 import kotlinx.serialization.Serializable
 
@@ -22,7 +28,7 @@ object SecondPollScreen
 @Serializable
 object ThirdPollScreen
 @Serializable
-object ForthPollScreen
+object FourthPollScreen
 @Serializable
 object FifthPollScreen
 @Serializable
@@ -36,8 +42,8 @@ internal fun NavController.navigateToThirdPoll(navOptions: NavOptions? = null) {
     this.navigate(route = ThirdPollScreen, navOptions = navOptions)
 }
 
-internal fun NavController.navigateToForthPoll(navOptions: NavOptions? = null) {
-    this.navigate(route = ForthPollScreen, navOptions = navOptions)
+internal fun NavController.navigateToFourthPoll(navOptions: NavOptions? = null) {
+    this.navigate(route = FourthPollScreen, navOptions = navOptions)
 }
 
 internal fun NavController.navigateToFifthPoll(navOptions: NavOptions? = null) {
@@ -59,6 +65,7 @@ fun PollNavHost(
         onBack = { pollNavHostController.navigateUp() }
     ) {
         NavHost(
+//            modifier = Modifier.padding(top = 20.dp),
             navController = pollNavHostController,
             startDestination = FirstPollScreen,
         ) {
@@ -74,7 +81,22 @@ fun PollNavHost(
             }
             navigatingToScreen<ThirdPollScreen> {
                 PollScreenThird(pollViewModel = pollViewModel) {
-//                    pollNavHostController.navigateToForthPoll()
+                    pollNavHostController.navigateToFourthPoll()
+                }
+            }
+            navigatingToScreen<FourthPollScreen> {
+                PollScreenFourth(pollViewModel = pollViewModel) {
+                    pollNavHostController.navigateToFifthPoll()
+                }
+            }
+            navigatingToScreen<FifthPollScreen> {
+                PollScreenFifth(pollViewModel = pollViewModel) {
+                    pollNavHostController.navigateToSixthPoll()
+                }
+            }
+            navigatingToScreen<SixthPollScreen> {
+                PollScreenSixth(pollViewModel = pollViewModel) {
+                    navigateToMain()
                 }
             }
         }

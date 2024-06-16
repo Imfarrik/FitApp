@@ -3,6 +3,7 @@ package com.fit.presentation.poll
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,41 +30,34 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.fit.presentation.baseviews.BasePollContainer
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.fit.resources.theme.ButtonColor
 import com.fit.resources.theme.ChooseTheTrainingFrequency
 import com.fit.resources.theme.DisabledButtonColor
 import com.fit.resources.theme.Fitness
-import com.fit.resources.theme.GrayTitle
 import com.fit.resources.theme.ICanAFew
 import com.fit.resources.theme.IveBeenDoingSportsForAlongTime
 import com.fit.resources.theme.Next
 
-
 @Preview(showBackground = true)
 @Composable
 fun SixthPollPreview() {
-    PollScreenSixth(5) {}
+    PollScreenSixth(hiltViewModel())
 }
 
 @Composable
 fun PollScreenSixth(
-    currentProgress: Int = 0,
-    onBackButtonClick: () -> Unit,
+    pollViewModel: PollLauncherVM,
+    navigateToMain: () -> Unit = {}
 ) {
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
-        contentAlignment = Alignment.Center
+            .background(Color.White)
+            .padding(horizontal = 20.dp)
     ) {
-        BasePollContainer(
-            currentProgress = currentProgress,
-            onBackButtonClick = onBackButtonClick,
-        ) {
             Text(
                 text = ChooseTheTrainingFrequency,
                 fontSize = 25.sp,
@@ -92,7 +87,10 @@ fun PollScreenSixth(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Button(
-                    onClick = { /* Действие при нажатии на кнопку */ },
+                    onClick = {
+                        pollViewModel.toNextPollScreen()
+                        navigateToMain()
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .height(55.dp),
@@ -106,21 +104,15 @@ fun PollScreenSixth(
                         Text(text = Next)
                         Spacer(modifier = Modifier.weight(1f))
                         Icon(
-                            imageVector = Icons.Default.ArrowForward,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                             contentDescription = null,
                             tint = Color.White
                         )
                     }
                 }
             }
-        }
     }
-
 }
-
-
-
-
 
 @Composable
 fun TextBlockWithCustomText2(
@@ -151,6 +143,3 @@ fun TextBlockWithCustomText2(
         )
     }
 }
-
-
-
