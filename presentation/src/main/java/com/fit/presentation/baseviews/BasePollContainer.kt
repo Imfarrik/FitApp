@@ -4,12 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.runtime.Composable
@@ -23,7 +20,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.fit.data.Constants
 import com.fit.resources.R
 import com.fit.resources.theme.BackButtonCaption
-
 import com.fit.resources.theme.TextButtonColor
 
 @Preview(showBackground = true)
@@ -52,7 +48,7 @@ fun BasePollContainer(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 20.dp)
-            .windowInsetsPadding(WindowInsets.systemBars),
+//            .windowInsetsPadding(WindowInsets.systemBars),
     ) {
         ConstraintLayout(
             modifier = Modifier

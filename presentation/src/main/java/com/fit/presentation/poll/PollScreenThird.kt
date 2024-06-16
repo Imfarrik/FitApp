@@ -7,30 +7,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.fit.presentation.navigation.PollScreen
-import com.fit.presentation.baseviews.BasePollContainer
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.fit.presentation.baseviews.StubScreen
 
 @Preview(showBackground = true)
 @Composable
 fun ThirdPollPreview() {
-    PollScreenThird(1) {}
+    PollScreenThird(hiltViewModel())
 }
 
 @Composable
-fun PollScreenThird(
-    currentProgress: Int = 0,
-    onBackButtonClick: () -> Unit,
+internal fun PollScreenThird(
+    pollViewModel: PollLauncherVM,
+    navigateToNextScreen: () -> Unit = {}
 ) {
-    BasePollContainer(
-        currentProgress = currentProgress,
-        onBackButtonClick = onBackButtonClick,
-    ) {
         Box(
             modifier = Modifier.padding(top = 16.dp),
             contentAlignment = Alignment.Center
         ) {
-            StubScreen(caption = PollScreen.THIRD_POLL_SCREEN)
+            StubScreen(caption = "THIRD\nPOLL\nSCREEN")
         }
-    }
 }

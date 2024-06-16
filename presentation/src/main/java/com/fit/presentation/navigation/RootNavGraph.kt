@@ -1,17 +1,15 @@
 package com.fit.presentation.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
-import androidx.navigation.compose.rememberNavController
 import com.fit.presentation.auth.navigation.AuthNavHost
 import com.fit.presentation.onboarding.navigation.OnboardingNavHost
-import com.fit.presentation.onboarding.navigation.SplashScreen
+import com.fit.presentation.poll.navigation.PollNavHost
+import com.fit.presentation.utils.CrutchingAdapt
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -54,7 +52,7 @@ fun RootNavGraph(navController: NavHostController) {
             CrutchingAdapt { AuthNavHost(rootNavHostController = navController) }
         }
         composable<Poll> {
-            CrutchingAdapt { PollNavHost() }
+            CrutchingAdapt { PollNavHost { navController.navigateToMain() } }
         }
         composable<Coach> {
 

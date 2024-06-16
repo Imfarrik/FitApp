@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.fit.presentation.baseviews.BasePollContainer
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.fit.presentation.splash.ImageWithCaptionItem
 import com.fit.resources.theme.FirstPollScreenAdditionalCaption
 import com.fit.resources.theme.FirstPollScreenMainCaption
@@ -34,19 +34,14 @@ import com.fit.resources.theme.TextColorGray
 @Preview(showBackground = true)
 @Composable
 fun FirstPollPreview() {
-    PollScreenFirst(currentProgress = 1)
+    PollScreenFirst(hiltViewModel())
 }
 
 @Composable
-fun PollScreenFirst(
-    currentProgress: Int = 0,
-    onBackButtonClick: () -> Unit = {},
+internal fun PollScreenFirst(
+    pollViewModel: PollLauncherVM,
     navigateToNextScreen: () -> Unit = {}
 ) {
-        BasePollContainer(
-            currentProgress = currentProgress,
-            onBackButtonClick = onBackButtonClick,
-        ) {
             Column(modifier = Modifier.padding(top = 48.dp)) {
                 Box(
                     modifier = Modifier.fillMaxWidth(),
@@ -79,16 +74,16 @@ fun PollScreenFirst(
                 Column(modifier = Modifier.padding(top = 36.dp)) {
                     ImageWithCaptionItem.firstPollScreenItems().map {
                         PollScreenItem(pollScreenItem = it) {
+                            pollViewModel.toNextPollScreen()
                             navigateToNextScreen()
                         }
                     }
                 }
             }
-        }
 }
 
 @Composable
-fun PollScreenItem(
+internal fun PollScreenItem(
     pollScreenItem: ImageWithCaptionItem,
     onItemClick: () -> Unit = {},
 ) {

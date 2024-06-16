@@ -72,9 +72,7 @@ internal fun LoginLauncherRoute(
     navigateToMain: () -> Unit
 ) {
     val authViewModel: AuthLauncherVM =
-        hiltViewModel<AuthLauncherVM>().also{
-            rememberViewModel(it)
-        }
+        hiltViewModel<AuthLauncherVM>().also(rememberViewModel)
 
     LoginLauncher(
         viewModel = authViewModel,
@@ -84,7 +82,7 @@ internal fun LoginLauncherRoute(
 }
 
 @Composable
-internal fun LoginLauncher(
+private fun LoginLauncher(
     viewModel: AuthLauncherVM,
     onBack: () -> Unit,
     navigateToVerify: () -> Unit,

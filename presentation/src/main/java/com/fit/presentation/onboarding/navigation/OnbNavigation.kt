@@ -6,10 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.fit.presentation.navigation.CrutchingAdapt
 import com.fit.presentation.onboarding.FirstOnboardingLauncherRoute
 import com.fit.presentation.onboarding.OtherOnboardingLauncherRoute
 import com.fit.presentation.onboarding.SplashLauncherRoute
+import com.fit.presentation.utils.CrutchingAdapt
 import com.fit.presentation.utils.navigatingToScreen
 import kotlinx.serialization.Serializable
 
