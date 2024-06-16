@@ -1,7 +1,7 @@
 package com.fit.presentation.profile
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,11 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,31 +28,26 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.fit.data.model.LoginRequest
+import com.fit.data.model.Client
 import com.fit.resources.R
 import com.fit.resources.theme.ButtonColor
 import com.fit.resources.theme.ChooseYourTarif
 import com.fit.resources.theme.DescriptionHelpToChoose
-import com.fit.resources.theme.Next
 import com.fit.resources.theme.Save
 
 @Preview(showBackground = true)
 @Composable
 private fun LoginScreenPreview() {
-
-    RatePageScreen(login = {})
-
+    RatePageScreen()
 }
 
 @Composable
 fun RatePageScreen(
-    login: (LoginRequest) -> Unit = { LoginRequest() },
-    navigateToVerify: () -> Unit = {}
+    onBack: () -> Unit = {}
 ) {
 
     Column(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .padding(horizontal = 16.dp)
     ) {
@@ -67,7 +59,9 @@ fun RatePageScreen(
                 Image(
                     painter = painterResource(id = R.drawable.img_rate_left),
                     contentDescription = null,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickable { onBack() }
                 )
 
 
@@ -137,7 +131,8 @@ fun RatePageScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
             Button(
-                onClick = { /* Действие при нажатии на кнопку */ },
+                // TODO: Temporary stub
+                onClick = { onBack() },
                 modifier = Modifier
                     .weight(1f)
                     .height(55.dp),

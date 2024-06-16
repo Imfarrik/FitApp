@@ -43,7 +43,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.fit.data.model.LoginRequest
+import com.fit.data.model.Client
+import com.fit.data.model.User
 import com.fit.presentation.baseviews.BaseMainButton
 import com.fit.resources.R
 import com.fit.resources.theme.Email
@@ -100,7 +101,7 @@ private fun LoginLauncher(
 private fun LoginLauncherScreen(
     navigateToVerify: () -> Unit = {},
     navigateToMain: () -> Unit = {},
-    login: (LoginRequest) -> Unit = { LoginRequest() },
+    login: (Client) -> Unit = { Client() },
 ) {
     var emailText by remember { mutableStateOf(TextFieldValue()) }
     var isAgreeWithPolicy by remember {
@@ -276,9 +277,12 @@ private fun LoginLauncherScreen(
                     enabled = isAgreeWithPolicy
                 ) {
                     login(
-                        LoginRequest(
-                            userName = "Roman",
-                            email = emailText.text
+                        Client(
+                            user =
+                                User(
+                                    name = "Roman",
+                                    email = emailText.text
+                                ),
                         )
                     )
                     navigateToVerify()

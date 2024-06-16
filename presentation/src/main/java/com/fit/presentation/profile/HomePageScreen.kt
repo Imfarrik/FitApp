@@ -2,6 +2,7 @@ package com.fit.presentation.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,7 +29,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.fit.data.model.LoginRequest
 import com.fit.resources.R
 import com.fit.resources.theme.Additionally
 import com.fit.resources.theme.ChooseAtarif
@@ -46,20 +45,16 @@ import com.fit.resources.theme.YourTariff
 @Preview(showBackground = true)
 @Composable
 private fun LoginScreenPreview() {
-
-    HomePageScreen(login = {})
-
+    HomePageScreen()
 }
 
 @Composable
 fun HomePageScreen(
-    login: (LoginRequest) -> Unit = { LoginRequest() },
-    navigateToVerify: () -> Unit = {}
+    navigateToRate: () -> Unit = {}
 ) {
 
     Column(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .padding(horizontal = 16.dp)
     ) {
@@ -218,7 +213,12 @@ fun HomePageScreen(
                     Spacer(modifier = Modifier.weight(1f))
                     ImageTextImageBlock(R.drawable.img_favorite, Favorite, R.drawable.img_right)
                     Spacer(modifier = Modifier.weight(1f))
-                    ImageTextImageBlock(R.drawable.img_choose_a_tariff, ChooseAtarif, R.drawable.img_right)
+                    ImageTextImageBlock(
+                        leftImageResId = R.drawable.img_choose_a_tariff,
+                        text = ChooseAtarif,
+                        rightImageResId = R.drawable.img_right,
+                        onClick = navigateToRate
+                    )
                     Spacer(modifier = Modifier.weight(1f))
                     ImageTextImageBlock(R.drawable.img_additionally, Additionally, R.drawable.img_right)
                     Spacer(modifier = Modifier.weight(1f))
@@ -270,9 +270,17 @@ fun HomePageScreen(
 
 
 @Composable
-fun ImageTextImageBlock(leftImageResId: Int, text: String, rightImageResId: Int) {
+fun ImageTextImageBlock(
+    leftImageResId: Int,
+    text: String,
+    rightImageResId: Int,
+    onClick: () -> Unit = {}
+) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
+        ,
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

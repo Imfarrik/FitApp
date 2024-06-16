@@ -3,7 +3,7 @@ package com.fit.presentation.auth
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fit.data.model.LoginRequest
+import com.fit.data.model.Client
 import com.fit.data.model.Resource
 import com.fit.data.model.VerifyRequest
 import com.fit.domain.onFailure
@@ -24,7 +24,7 @@ class AuthLauncherVM @Inject constructor(
     val authState: StateFlow<AuthState?>
         get() = _authState.asStateFlow()
 
-    fun login(loginRequest: LoginRequest) {
+    fun login(loginRequest: Client) {
         viewModelScope.launch {
             authUseCase.createUser(loginRequest).fetchingData {
                 Log.d("SUCCESS USER CREATE", "USER:\n$it")

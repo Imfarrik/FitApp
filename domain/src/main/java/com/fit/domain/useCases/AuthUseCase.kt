@@ -1,7 +1,7 @@
 package com.fit.domain.useCases
 
-import com.fit.data.model.AuthResponse
-import com.fit.data.model.LoginRequest
+import com.fit.data.model.VerifyResponse
+import com.fit.data.model.Client
 import com.fit.data.model.Resource
 import com.fit.data.model.User
 import com.fit.data.model.VerifyRequest
@@ -12,8 +12,8 @@ import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
 interface AuthUseCase {
-    suspend fun createUser(loginRequest: LoginRequest): Resource<User>
-    suspend fun verifyEmail(verifyRequest: VerifyRequest): Resource<AuthResponse>
+    suspend fun createUser(loginRequest: Client): Resource<Client>
+    suspend fun verifyEmail(verifyRequest: VerifyRequest): Resource<VerifyResponse>
 }
 
 internal class AuthUseCaseImpl @Inject constructor(
@@ -21,10 +21,10 @@ internal class AuthUseCaseImpl @Inject constructor(
     @IODispatcher
     private val dispatcher: CoroutineDispatcher
 ): AuthUseCase {
-    override suspend fun createUser(loginRequest: LoginRequest): Resource<User> =
+    override suspend fun createUser(loginRequest: Client): Resource<Client> =
         authRepository.createUser(loginRequest).getResponse(dispatcher)
 
-    override suspend fun verifyEmail(verifyRequest: VerifyRequest): Resource<AuthResponse> =
+    override suspend fun verifyEmail(verifyRequest: VerifyRequest): Resource<VerifyResponse> =
         authRepository.verifyEmail(verifyRequest).getResponse(dispatcher)
 
 }

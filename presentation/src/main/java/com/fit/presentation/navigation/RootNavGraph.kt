@@ -7,8 +7,10 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.fit.presentation.auth.navigation.AuthNavHost
+import com.fit.presentation.onboarding.SplashLauncherRoute
 import com.fit.presentation.onboarding.navigation.OnboardingNavHost
 import com.fit.presentation.poll.navigation.PollNavHost
+import com.fit.presentation.profile.navigation.ProfileNavHost
 import com.fit.presentation.utils.CrutchingAdapt
 import kotlinx.serialization.Serializable
 
@@ -55,10 +57,10 @@ fun RootNavGraph(navController: NavHostController) {
             CrutchingAdapt { PollNavHost { navController.navigateToMain() } }
         }
         composable<Coach> {
-
+            SplashLauncherRoute(onBack = { navController.navigateUp() }) {}
         }
         composable<Main> {
-
+            CrutchingAdapt { ProfileNavHost() }
         }
     }
 }

@@ -5,20 +5,14 @@ import com.google.gson.annotations.SerializedName
 data class User(
     @SerializedName("username")
     val name: String,
-    val password: String,
+    val password: String = "password",
     @SerializedName("is_superuser")
-    val isSuperuser: Boolean,
+    val isSuperuser: Boolean = false,
     @SerializedName("first_name")
-    val firstName: String,
+    val firstName: String? = null,
     @SerializedName("last_name")
-    val lastName: String,
+    val lastName: String? = null,
     val email: String,
     @SerializedName("is_verified")
-    val isVerified: Boolean
-): ResponseModel {
-    override fun toString(): String =
-        "name = $name\n" +
-                "password = $password\n" +
-                "email = $email\n" +
-                "user is verified = $isVerified"
-}
+    val isVerified: Boolean = false
+)
