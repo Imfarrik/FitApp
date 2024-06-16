@@ -37,7 +37,7 @@ android {
             buildConfigField(
                 "String",
                 "API_BASE_URL",
-                "\"http://127.0.0.0:8000\""
+                "\"http://127.0.0.1:8000\""
             )
 
         }
@@ -71,6 +71,8 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.annotation)
     implementation(libs.retrofit.serialization.converter)
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
     implementation(libs.retrofit.adapters.result)
 
     debugImplementation(libs.retrofit.logger)

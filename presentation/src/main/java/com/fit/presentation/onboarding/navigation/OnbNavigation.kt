@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.fit.presentation.navigation.CrutchingAdapt
 import com.fit.presentation.onboarding.FirstOnboardingLauncherRoute
 import com.fit.presentation.onboarding.OtherOnboardingLauncherRoute
 import com.fit.presentation.onboarding.SplashLauncherRoute
@@ -40,13 +41,17 @@ fun OnboardingNavHost(
             }
         }
         navigatingToScreen<FirstOnboarding> {
-            FirstOnboardingLauncherRoute(onBack = onBack) {
-                onboardingNavHostController.navigateToOtherOnboarding()
+            CrutchingAdapt {
+                FirstOnboardingLauncherRoute(onBack = onBack) {
+                    onboardingNavHostController.navigateToOtherOnboarding()
+                }
             }
         }
         navigatingToScreen<OtherOnboarding> {
-            OtherOnboardingLauncherRoute(onBack = onBack) {
-                navigateToAuth()
+            CrutchingAdapt {
+                OtherOnboardingLauncherRoute(onBack = onBack) {
+                    navigateToAuth()
+                }
             }
         }
     }

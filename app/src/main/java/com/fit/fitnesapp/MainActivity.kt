@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
         )
         setContent {
             FitnesAppTheme(dynamicColor = false, darkTheme = false) {
-                CrutchingAdapt { RootNavGraph(navController = rememberNavController()) }
+                RootNavGraph(navController = rememberNavController())
             }
         }
     }

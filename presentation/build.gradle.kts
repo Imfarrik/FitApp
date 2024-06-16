@@ -65,4 +65,5 @@ dependencies {
 
     implementation(project(":resources"))
     implementation(project(":data"))
+    implementation(project(":domain"))
 }

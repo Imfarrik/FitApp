@@ -51,10 +51,10 @@ fun RootNavGraph(navController: NavHostController) {
             OnboardingNavHost { navController.navigateToAuth() }
         }
         composable<Auth> {
-            AuthNavHost(rootNavHostController = navController)
+            CrutchingAdapt { AuthNavHost(rootNavHostController = navController) }
         }
         composable<Poll> {
-            PollNavHost()
+            CrutchingAdapt { PollNavHost() }
         }
         composable<Coach> {
 

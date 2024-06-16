@@ -63,6 +63,7 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit"}
 
 #   Navigation
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }

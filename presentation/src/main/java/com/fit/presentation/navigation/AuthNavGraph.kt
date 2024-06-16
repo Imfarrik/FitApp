@@ -102,6 +102,5 @@ fun CrutchingAdapt(composable: @Composable () -> Unit) {
             .windowInsetsPadding(WindowInsets.navigationBars)
             .verticalScroll(rememberScrollState())
         ,
-//        verticalArrangement = Arrangement.Center
     ) { composable() }
 }
