@@ -74,7 +74,7 @@ fun PollNavHost(
             }
             navigatingToScreen<ThirdPollScreen> {
                 PollScreenThird(pollViewModel = pollViewModel) {
-                    pollNavHostController.navigateToForthPoll()
+//                    pollNavHostController.navigateToForthPoll()
                 }
             }
         }
