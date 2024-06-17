@@ -67,7 +67,6 @@ private fun LoginScreenPreview() {
 
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     login: (LoginRequest) -> Unit = { LoginRequest() },
