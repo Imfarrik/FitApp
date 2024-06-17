@@ -1,7 +1,6 @@
 package com.fit.presentation.profile
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,11 +14,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,7 +32,6 @@ import com.fit.resources.R
 import com.fit.resources.theme.ButtonColor
 import com.fit.resources.theme.ChooseYourTarif
 import com.fit.resources.theme.DescriptionHelpToChoose
-import com.fit.resources.theme.Next
 import com.fit.resources.theme.Save
 
 @Preview(showBackground = true)
